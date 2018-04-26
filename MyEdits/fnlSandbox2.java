@@ -6,9 +6,10 @@ import javax.swing.border.BevelBorder;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.BorderLayout;
 
 
-public class fnlSandbox{
+public class fnlSandbox2{
 
   
   static HashMap<String, JButton> memo = new HashMap<String, JButton>();
@@ -20,9 +21,10 @@ public class fnlSandbox{
     public static void main(String[] args) throws IOException{ //I have no idea what the throws part means but
                                                                //some guy on stackoverflow used it to save files
         final JFrame f = new JFrame("My Collage");
-
+       
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
-        
+        f.setLayout(new BorderLayout());
+        f.add(panel, BorderLayout.CENTER);
 //        int scanner1 = scan.nextInt();
 //       int scanner2 = scan.nextInt();
         
@@ -38,6 +40,15 @@ public class fnlSandbox{
             memo1.put(key, photo);
         }
         
+       JPanel buttonPanel = new JPanel();
+       buttonPanel.setLayout(new GridLayout(3, 2));
+        JButton b1 = new JButton("Red Sort");
+        JButton b2 = new JButton("Blue Sort");
+        JButton b3 = new JButton("Green Sort");
+         buttonPanel.add(b1);
+         buttonPanel.add(b2);
+         buttonPanel.add(b3);
+         f.add(buttonPanel, BorderLayout.EAST);
         
 //        swapHash("image"+scanner1, "image"+scanner2);
 //        swapHash1("image"+scanner1, "image"+scanner2);
@@ -57,7 +68,7 @@ public class fnlSandbox{
         int greenTotal = 0;
         int clrTotal = 0;
 
-        f.setContentPane(panel);
+     //   f.setContentPane(panel, buttonPanel);
         f.setSize(800, 800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
