@@ -50,14 +50,16 @@ public class fnlSandbox{
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
         int clrTotal = 0;
-        for(int m = 0; m < 16; m++)
+        for(int m = 0; m < 16; m++){
         for(int k = 1; k < 200; k = k+10){
           for(int l = 1; l < 200; l = l+10){
             int clr =  memo1.get("image0").getRGB(l,k);
             clrTotal += (clr & 0x00f00000) >> 20;
           }
         }
+        
           System.out.println(clrTotal);
+    }
     }
     
     public static void swapHash(String key1, String key2){

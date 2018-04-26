@@ -22,8 +22,8 @@ public class fnlSandbox{
 
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         
- //       int scanner1 = scan.nextInt();
- //       int scanner2 = scan.nextInt();
+        int scanner1 = scan.nextInt();
+        int scanner2 = scan.nextInt();
         
         for (int i = 0; i < 16; i++){
           String key = "image"+i;
@@ -39,7 +39,7 @@ public class fnlSandbox{
         }
         
         
- //       swapHash("image"+scanner1, "image"+scanner2);
+        swapHash("image"+scanner1, "image"+scanner2);
         
         for(int j = 0; j < 16; j++){
           panel.add(memo.get("image"+j));
@@ -50,16 +50,14 @@ public class fnlSandbox{
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
         int clrTotal = 0;
-        for(int m = 0; m < 16; m++){
-          clrTotal = 0;
-        for(int k = 1; k < 200; k = k++){
-          for(int l = 1; l < 200; l = l++){
-            int clr =  memo1.get("image"+m).getRGB(l,k);
+        for(int m = 0; m < 16; m++)
+        for(int k = 1; k < 200; k = k+10){
+          for(int l = 1; l < 200; l = l+10){
+            int clr =  memo1.get("image0").getRGB(l,k);
             clrTotal += (clr & 0x00f00000) >> 20;
           }
         }
-          System.out.println("Red in picture "+m+": "+clrTotal);
-    }
+          System.out.println(clrTotal);
     }
     
     public static void swapHash(String key1, String key2){
