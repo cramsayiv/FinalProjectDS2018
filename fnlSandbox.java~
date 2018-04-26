@@ -22,15 +22,14 @@ public class fnlSandbox{
 
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         
-        int scanner1 = scan.nextInt();
-        int scanner2 = scan.nextInt();
+//        int scanner1 = scan.nextInt();
+//        int scanner2 = scan.nextInt();
         
         for (int i = 0; i < 16; i++){
           String key = "image"+i;
           JButton imgButton = new JButton();
           imgButton.setIcon(new ImageIcon("image"+i+".jpg"));
             imgButton.setBorder(BorderFactory.createEmptyBorder());
-            imgButton.setFont(imgButton.getFont().deriveFont(20f));
             memo.put(key, imgButton);
             
             File photoFile= new File("image"+i+".jpg");
@@ -39,28 +38,54 @@ public class fnlSandbox{
         }
         
         
-        swapHash("image"+scanner1, "image"+scanner2);
+//        swapHash("image"+scanner1, "image"+scanner2);
         
         for(int j = 0; j < 16; j++){
           panel.add(memo.get("image"+j));
         }
+        
+        int redVal = 0;
+        int blueVal = 0;
+        int greenVal = 0;
+        int redTotal = 0;
+        int blueTotal = 0;
+        int greenTotal = 0;
+        int clrTotal = 0;
 
         f.setContentPane(panel);
         f.setSize(800, 800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
-        int clrTotal = 0;
-        for(int m = 0; m < 16; m++)
+        
+        
+        for(int m = 0; m < 16; m++){
+//          
+        redTotal = 0;
+        blueTotal = 0;
+        greenTotal = 0;
+          
         for(int k = 1; k < 200; k = k+10){
           for(int l = 1; l < 200; l = l+10){
-            int clr =  memo1.get("image0").getRGB(l,k);
-            clrTotal += (clr & 0x00f00000) >> 20;
+            int clr =  memo1.get("image"+m).getRGB(l,k);
+            redTotal += (clr & 0x00f00000) >> 20;
+            greenTotal += (clr & 0x0000f000) >> 12;
+            blueTotal += (clr & 0x000000f0) >> 4;
           }
-        }
-          System.out.println(clrTotal);
+          
+        }    
+        redVal = redTotal-greenTotal-blueTotal;
+        blueVal = blueTotal-redTotal-greenTotal;
+        greenVal = greenTotal-redTotal-blueTotal;
+        
+        
+
+               System.out.println("red is "+redVal+", blue is "+blueVal+", green is "+greenVal);
+     
+          
+    }
     }
     
-    public static void swapHash(String key1, String key2){
+    public static void swapHash(String key1, String key2, HashMap m){
       JButton tempKey = memo.get(key1);
       memo.put(key1, memo.get(key2));
       memo.put(key2, tempKey);
