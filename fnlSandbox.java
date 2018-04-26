@@ -25,8 +25,8 @@ public class fnlSandbox{
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         f.setLayout(new BorderLayout());
         f.add(panel, BorderLayout.CENTER);
-//        int scanner1 = scan.nextInt();
-//       int scanner2 = scan.nextInt();
+        int scanner1 = scan.nextInt();
+       int scanner2 = scan.nextInt();
         
         for (int i = 0; i < 16; i++){
           String key = "image"+i;
@@ -50,11 +50,11 @@ public class fnlSandbox{
          buttonPanel.add(b3);
          f.add(buttonPanel, BorderLayout.EAST);
         
-//        swapHash("image"+scanner1, "image"+scanner2);
-//        swapHash1("image"+scanner1, "image"+scanner2);
-//        swapHash2("red"+scanner1, "red"+scanner2);
-//        swapHash2("green"+scanner1, "green"+scanner2);
-//        swapHash2("blue"+scanner1, "blue"+scanner2);
+        swapHash("image"+scanner1, "image"+scanner2);
+        swapHash1("image"+scanner1, "image"+scanner2);
+        swapHash2("red"+scanner1, "red"+scanner2);
+        swapHash2("green"+scanner1, "green"+scanner2);
+        swapHash2("blue"+scanner1, "blue"+scanner2);
         
         for(int j = 0; j < 16; j++){
           panel.add(memo.get("image"+j));
@@ -68,7 +68,6 @@ public class fnlSandbox{
         int greenTotal = 0;
         int clrTotal = 0;
 
-     //   f.setContentPane(panel, buttonPanel);
         f.setSize(800, 800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
@@ -122,9 +121,9 @@ public class fnlSandbox{
       memo1.put(key2, tempKey);
     }
     
-//    public static void swapHash2(String key1, String key2){
-//      int tempKey = memo2.get(key1);
-//      memo2.put(key1, memo2.get(key2));
-//      memo2.put(key2, tempKey);
-//    }
+    public static void swapHash2(String key1, String key2){
+      Integer tempKey = memo2.get(key1);
+      memo2.put(key1, memo2.get(key2));
+      memo2.put(key2, tempKey);
+    }
 }
