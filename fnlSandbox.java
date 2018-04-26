@@ -18,16 +18,16 @@ public class fnlSandbox{
 
   static Scanner scan = new Scanner(System.in);
   
-    public static void main(String[] args) throws IOException{ //I have no idea what the throws part means but
-                                                               //some guy on stackoverflow used it to save files
+    public static void main(String[] args) throws IOException{
+      
         final JFrame f = new JFrame("My Collage");
        
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         f.setLayout(new BorderLayout());
         f.add(panel, BorderLayout.CENTER);
         
-        int scanner1 = scan.nextInt();
-        int scanner2 = scan.nextInt();
+//        int scanner1 = scan.nextInt();
+//        int scanner2 = scan.nextInt();
         
         
         for (int i = 0; i < 16; i++){
@@ -43,8 +43,6 @@ public class fnlSandbox{
         }
         
         
-        swapAll("image"+scanner1, "image"+scanner2);
-        
        JPanel buttonPanel = new JPanel();
        buttonPanel.setLayout(new GridLayout(3, 2));
         JButton b1 = new JButton("Red Sort");
@@ -54,8 +52,6 @@ public class fnlSandbox{
          buttonPanel.add(b2);
          buttonPanel.add(b3);
          f.add(buttonPanel, BorderLayout.EAST);
-        
-
         
         for(int j = 0; j < 16; j++){
           panel.add(memo.get("image"+j));
@@ -86,11 +82,11 @@ public class fnlSandbox{
             redTotal += (clr & 0x00f00000) >> 20;
             greenTotal += (clr & 0x0000f000) >> 12;
             blueTotal += (clr & 0x000000f0) >> 4;
-            
-            
           }
           
-        }    
+          
+          
+        }
         redVal = redTotal-greenTotal-blueTotal;
         blueVal = blueTotal-redTotal-greenTotal;
         greenVal = greenTotal-redTotal-blueTotal;
@@ -104,10 +100,27 @@ public class fnlSandbox{
         memo2.put(blueKey, blueVal);
         memo2.put(greenKey, greenVal);
         
+        
         System.out.println("red is "+redVal+", blue is "+blueVal+", green is "+greenVal);
      
           
     }
+        
+
+        sortRed();
+        
+        
+       
+//        for(int o = 0; o < 16; o++)
+//          panel.add(memo.get("image"+o));
+//        
+//        f.add(panel, BorderLayout.CENTER);
+//        
+//        panel.updateUI();
+        
+        System.out.println(memo2.get("red0")+", "+memo2.get("red1")+ "," + memo2.get("red15"));
+//        
+        
     }
     
     public static void swapHash(String key1, String key2){
@@ -136,6 +149,18 @@ public class fnlSandbox{
         swapHash2("red"+keyInt, "red"+keyInt1);
         swapHash2("green"+keyInt, "green"+keyInt1);
         swapHash2("blue"+keyInt, "blue"+keyInt1);
-      
+    }
+    
+    public static void sortRed(){
+      int count = 0;
+      do{
+        count = 0;
+        for(int n = 0; n < 15; n++)
+          if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
+            swapAll("image"+n, "image"+(n+1));
+            count += 1;
+          
+        }
+      }while(count != 0);
     }
 }
