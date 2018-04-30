@@ -7,7 +7,8 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.BorderLayout;
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class fnlSandbox{
 
@@ -15,13 +16,14 @@ public class fnlSandbox{
   static HashMap<String, JButton> memo = new HashMap<String, JButton>();
   static HashMap<String, BufferedImage> memo1 = new HashMap<String, BufferedImage>();
   static HashMap<String, Integer> memo2 = new HashMap<String, Integer>();
+  static HashMap<String, JFrame> memo3 = new HashMap<String, JFrame>();
 
   static Scanner scan = new Scanner(System.in);
   
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, InterruptedException{
       
         JFrame f = new JFrame("My Collage");
-       
+       JFrame fStore = f;
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         f.setLayout(new BorderLayout());
         f.add(panel, BorderLayout.CENTER);
@@ -45,9 +47,77 @@ public class fnlSandbox{
         
        JPanel buttonPanel = new JPanel();
        buttonPanel.setLayout(new GridLayout(3, 2));
-        JButton b1 = new JButton("Red Sort");
-        JButton b2 = new JButton("Blue Sort");
-        JButton b3 = new JButton("Green Sort");
+        
+       
+       
+       JButton b1 = new JButton("Red Sort");
+       b1.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+           
+           int count = 0;
+           do{
+             count = 0;
+             for(int n = 0; n < 15; n++)
+               if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
+               swapAll("image"+n, "image"+(n+1));
+               count += 1;
+               
+//                  f.setVisible(false);
+//                  panelDraw();
+//                  try{
+//                  Thread.sleep(1000);
+//                  }catch(InterruptedException q){
+//                  }
+             }
+           }while(count != 0);
+           f.setVisible(false);
+//           f = new JFrame("My Collage");
+           panelDraw(f);
+         }
+         
+         
+       } );
+       
+       JButton b2 = new JButton("Green Sort");
+       b2.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+           int count = 0;
+           do{
+             count = 0;
+             for(int n = 0; n < 15; n++)
+               if(memo2.get("green"+n) < memo2.get("green"+(n+1))){
+               swapAll("image"+n, "image"+(n+1));
+               count += 1; 
+               
+             }
+           }while(count != 0);
+           f.setVisible(false);
+//           f = new JFrame("My Collage");
+           panelDraw(f);
+         }
+       } );
+           
+        JButton b3 = new JButton("Blue Sort");
+        b3.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            int count = 0;
+      do{
+        count = 0;
+        for(int n = 0; n < 15; n++)
+          if(memo2.get("blue"+n) < memo2.get("blue"+(n+1))){
+            swapAll("image"+n, "image"+(n+1));
+            count += 1;
+          
+        }
+      }while(count != 0);
+      
+           f.setVisible(false);
+//           f = new JFrame("My Collage");
+           panelDraw(f);
+    }
+        } );
+
+        
          buttonPanel.add(b1);
          buttonPanel.add(b2);
          buttonPanel.add(b3);
@@ -87,7 +157,7 @@ public class fnlSandbox{
           
           
         }
-        redVal = redTotal-(greenTotal+blueTotal)/2;
+         redVal = redTotal-(greenTotal+blueTotal)/2;
         blueVal = blueTotal-(redTotal+greenTotal)/2;
         greenVal = greenTotal-(redTotal+blueTotal)/2;
         
@@ -101,18 +171,17 @@ public class fnlSandbox{
         memo2.put(greenKey, greenVal);
         
         
+        
         System.out.println("red is "+redVal+", blue is "+blueVal+", green is "+greenVal);
      
           
     }
         
 
-        sortRed();
-        f.setVisible(false);
-        panelDraw();
+//       sortRed();
+//       f.setVisible(false);
+//       panelDraw();
         
-        for(int p = 0; p < 16; p++)
-          System.out.println(memo2.get("blue"+p));
        
        
 //        for(int o = 0; o < 16; o++)
@@ -122,8 +191,9 @@ public class fnlSandbox{
 //        
 //        panel.updateUI();
         
+      
         System.out.println(memo2.get("red0")+", "+memo2.get("red1")+ "," + memo2.get("red15"));
-//        
+        
         
     }
     
@@ -155,47 +225,49 @@ public class fnlSandbox{
         swapHash2("blue"+keyInt, "blue"+keyInt1);
     }
     
-    public static void sortRed(){
-      int count = 0;
-      do{
-        count = 0;
-        for(int n = 0; n < 15; n++)
-          if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
-            swapAll("image"+n, "image"+(n+1));
-            count += 1;
-          
-        }
-      }while(count != 0);
-    }
-    
-        public static void sortGreen(){
-      int count = 0;
-      do{
-        count = 0;
-        for(int n = 0; n < 15; n++)
-          if(memo2.get("green"+n) < memo2.get("green"+(n+1))){
-            swapAll("image"+n, "image"+(n+1));
-            count += 1;
-          
-        }
-      }while(count != 0);
-    }
+//    public static void sortRed(){
+//      int count = 0;
+//      do{
+//        count = 0;
+//        for(int n = 0; n < 15; n++)
+//          if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
+//            swapAll("image"+n, "image"+(n+1));
+//            count += 1; 
+//          
+//        }
+//      }while(count != 0);
+//    } 
+//    
+//         public static void sortGreen(){
+//      int count = 0;
+//      do{
+//        count = 0;
+//        for(int n = 0; n < 15; n++)
+//          if(memo2.get("green"+n) < memo2.get("green"+(n+1))){
+//            swapAll("image"+n, "image"+(n+1));
+//            count += 1; 
+//        
+//    }
+//      }while(count != 0);
+//    } 
+
+//public static void sortBlue(){
+//      int count = 0;
+//      do{
+//        count = 0;
+//        for(int n = 0; n < 15; n++)
+//          if(memo2.get("blue"+n) < memo2.get("blue"+(n+1))){
+//            swapAll("image"+n, "image"+(n+1));
+//            count += 1;
+//          
+//        }
+//      }while(count != 0);
+//    }
+
         
-      public static void sortBlue(){
-      int count = 0;
-      do{
-        count = 0;
-        for(int n = 0; n < 15; n++)
-          if(memo2.get("blue"+n) < memo2.get("blue"+(n+1))){
-            swapAll("image"+n, "image"+(n+1));
-            count += 1;
-          
-        }
-      }while(count != 0);
-    }
+   
     
-    public static void panelDraw(){
-      JFrame f = new JFrame("My Collage");
+    public static void panelDraw(JFrame f){
        
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         f.setLayout(new BorderLayout());
@@ -220,6 +292,7 @@ public class fnlSandbox{
         f.setSize(800, 800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+        memo3.put("thisislame", f);
         
         
     }
