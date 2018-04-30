@@ -87,9 +87,9 @@ public class fnlSandbox{
           
           
         }
-        redVal = redTotal-greenTotal-blueTotal;
-        blueVal = blueTotal-redTotal-greenTotal;
-        greenVal = greenTotal-redTotal-blueTotal;
+        redVal = redTotal-(greenTotal+blueTotal)/2;
+        blueVal = blueTotal-(redTotal+greenTotal)/2;
+        greenVal = greenTotal-(redTotal+blueTotal)/2;
         
         
         String redKey = "red"+m;
@@ -111,6 +111,8 @@ public class fnlSandbox{
         f.setVisible(false);
         panelDraw();
         
+        for(int p = 0; p < 16; p++)
+          System.out.println(memo2.get("blue"+p));
        
        
 //        for(int o = 0; o < 16; o++)
@@ -159,6 +161,32 @@ public class fnlSandbox{
         count = 0;
         for(int n = 0; n < 15; n++)
           if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
+            swapAll("image"+n, "image"+(n+1));
+            count += 1;
+          
+        }
+      }while(count != 0);
+    }
+    
+        public static void sortGreen(){
+      int count = 0;
+      do{
+        count = 0;
+        for(int n = 0; n < 15; n++)
+          if(memo2.get("green"+n) < memo2.get("green"+(n+1))){
+            swapAll("image"+n, "image"+(n+1));
+            count += 1;
+          
+        }
+      }while(count != 0);
+    }
+        
+      public static void sortBlue(){
+      int count = 0;
+      do{
+        count = 0;
+        for(int n = 0; n < 15; n++)
+          if(memo2.get("blue"+n) < memo2.get("blue"+(n+1))){
             swapAll("image"+n, "image"+(n+1));
             count += 1;
           
