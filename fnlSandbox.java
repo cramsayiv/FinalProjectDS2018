@@ -20,7 +20,7 @@ public class fnlSandbox{
   
     public static void main(String[] args) throws IOException{
       
-        final JFrame f = new JFrame("My Collage");
+        JFrame f = new JFrame("My Collage");
        
         JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
         f.setLayout(new BorderLayout());
@@ -108,8 +108,10 @@ public class fnlSandbox{
         
 
         sortRed();
+        f.setVisible(false);
+        panelDraw();
         
-        
+       
        
 //        for(int o = 0; o < 16; o++)
 //          panel.add(memo.get("image"+o));
@@ -162,5 +164,35 @@ public class fnlSandbox{
           
         }
       }while(count != 0);
+    }
+    
+    public static void panelDraw(){
+      JFrame f = new JFrame("My Collage");
+       
+        JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
+        f.setLayout(new BorderLayout());
+        f.add(panel, BorderLayout.CENTER);
+        
+        
+        JPanel buttonPanel = new JPanel();
+       buttonPanel.setLayout(new GridLayout(3, 2));
+        JButton b1 = new JButton("Red Sort");
+        JButton b2 = new JButton("Blue Sort");
+        JButton b3 = new JButton("Green Sort");
+         buttonPanel.add(b1);
+         buttonPanel.add(b2);
+         buttonPanel.add(b3);
+         f.add(buttonPanel, BorderLayout.EAST);
+        
+        for(int j = 0; j < 16; j++){
+          panel.add(memo.get("image"+j));
+        }
+          
+
+        f.setSize(800, 800);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+        
+        
     }
 }
