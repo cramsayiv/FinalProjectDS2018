@@ -16,7 +16,6 @@ public class fnlSandbox{
   static HashMap<String, JButton> memo = new HashMap<String, JButton>();
   static HashMap<String, BufferedImage> memo1 = new HashMap<String, BufferedImage>();
   static HashMap<String, Integer> memo2 = new HashMap<String, Integer>();
-  static HashMap<String, JFrame> memo3 = new HashMap<String, JFrame>();
 
   static Scanner scan = new Scanner(System.in);
   
@@ -64,15 +63,16 @@ public class fnlSandbox{
                
 //                  f.setVisible(false);
 //                  panelDraw();
+               
+               panelDraw(f, panel);
 //                  try{
-//                  Thread.sleep(1000);
+//                  Thread.sleep(100);
 //                  }catch(InterruptedException q){
 //                  }
              }
            }while(count != 0);
-           f.setVisible(false);
+//           f.setVisible(false);
 //           f = new JFrame("My Collage");
-           panelDraw(f);
          }
          
          
@@ -91,9 +91,9 @@ public class fnlSandbox{
                
              }
            }while(count != 0);
-           f.setVisible(false);
+//           f.setVisible(false);
 //           f = new JFrame("My Collage");
-           panelDraw(f);
+           panelDraw(f, panel);
          }
        } );
            
@@ -111,9 +111,9 @@ public class fnlSandbox{
         }
       }while(count != 0);
       
-           f.setVisible(false);
+//           f.setVisible(false);
 //           f = new JFrame("My Collage");
-           panelDraw(f);
+           panelDraw(f, panel);
     }
         } );
 
@@ -267,22 +267,22 @@ public class fnlSandbox{
         
    
     
-    public static void panelDraw(JFrame f){
+    public static void panelDraw(JFrame f, JPanel panel){
        
-        JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
-        f.setLayout(new BorderLayout());
-        f.add(panel, BorderLayout.CENTER);
-        
-        
-        JPanel buttonPanel = new JPanel();
-       buttonPanel.setLayout(new GridLayout(3, 2));
-        JButton b1 = new JButton("Red Sort");
-        JButton b2 = new JButton("Blue Sort");
-        JButton b3 = new JButton("Green Sort");
-         buttonPanel.add(b1);
-         buttonPanel.add(b2);
-         buttonPanel.add(b3);
-         f.add(buttonPanel, BorderLayout.EAST);
+//        JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
+//        f.setLayout(new BorderLayout());
+//        f.add(panel, BorderLayout.CENTER);
+//        
+//        
+//        JPanel buttonPanel = new JPanel();
+//       buttonPanel.setLayout(new GridLayout(3, 2));
+//        JButton b1 = new JButton("Red Sort");
+//        JButton b2 = new JButton("Blue Sort");
+//        JButton b3 = new JButton("Green Sort");
+//         buttonPanel.add(b1);
+//         buttonPanel.add(b2);
+//         buttonPanel.add(b3);
+//         f.add(buttonPanel, BorderLayout.EAST);
         
         for(int j = 0; j < 16; j++){
           panel.add(memo.get("image"+j));
@@ -292,7 +292,6 @@ public class fnlSandbox{
         f.setSize(800, 800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
-        memo3.put("thisislame", f);
         
         
     }
