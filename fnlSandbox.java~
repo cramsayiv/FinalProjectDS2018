@@ -13,9 +13,9 @@ import java.awt.event.ActionEvent;
 public class fnlSandbox{
   
   
-  static HashMap<String, JButton> memo = new HashMap<String, JButton>();
-  static HashMap<String, BufferedImage> memo1 = new HashMap<String, BufferedImage>();
-  static HashMap<String, Integer> memo2 = new HashMap<String, Integer>();
+  static HashMap<String, JButton> memoButtons = new HashMap<String, JButton>();
+  static HashMap<String, BufferedImage> memoBufferedImages = new HashMap<String, BufferedImage>();
+  static HashMap<String, Integer> memoColorValues = new HashMap<String, Integer>();
   
   static Scanner scan = new Scanner(System.in);
   
@@ -33,11 +33,11 @@ public class fnlSandbox{
       JButton imgButton = new JButton();
       imgButton.setIcon(new ImageIcon("image"+i+".jpg"));
       imgButton.setBorder(BorderFactory.createEmptyBorder());
-      memo.put(key, imgButton);
+      memoButtons.put(key, imgButton);
       
       File photoFile= new File("image"+i+".jpg");
       BufferedImage photo = ImageIO.read(photoFile);
-      memo1.put(key, photo);
+      memoBufferedImages.put(key, photo);
     }
     
     
@@ -46,8 +46,8 @@ public class fnlSandbox{
     
     
     
-    JButton b1 = new JButton("Red Sort");
-    b1.addActionListener(new ActionListener() {
+    JButton redButton = new JButton("Red Sort");
+    redButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         new Thread(new Runnable() {
           public void run(){
@@ -56,7 +56,7 @@ public class fnlSandbox{
             do{
               count = 0;
               for(int n = 0; n < 15; n++)
-                if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
+                if(memoColorValues.get("red"+n) < memoColorValues.get("red"+(n+1))){
                 swapAll("image"+n, "image"+(n+1));
                 count += 1;
                 panelDraw(mainJFrame, panel);
@@ -71,8 +71,8 @@ public class fnlSandbox{
       } 
     } );
     
-    JButton b2 = new JButton("Green Sort");
-    b2.addActionListener(new ActionListener() {
+    JButton greenButton = new JButton("Green Sort");
+    greenButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         new Thread(new Runnable() {
           public void run(){
@@ -80,7 +80,7 @@ public class fnlSandbox{
             do{
               count = 0;
               for(int n = 0; n < 15; n++)
-                if(memo2.get("green"+n) < memo2.get("green"+(n+1))){
+                if(memoColorValues.get("green"+n) < memoColorValues.get("green"+(n+1))){
                 swapAll("image"+n, "image"+(n+1));
                 count += 1;
                 panelDraw(mainJFrame, panel);
@@ -95,8 +95,8 @@ public class fnlSandbox{
       }
     } );
     
-    JButton b3 = new JButton("Blue Sort");
-    b3.addActionListener(new ActionListener() {
+    JButton blueButton = new JButton("Blue Sort");
+    blueButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         new Thread(new Runnable() {
           public void run(){
@@ -104,7 +104,7 @@ public class fnlSandbox{
             do{
               count = 0;
               for(int n = 0; n < 15; n++)
-                if(memo2.get("blue"+n) < memo2.get("blue"+(n+1))){
+                if(memoColorValues.get("blue"+n) < memoColorValues.get("blue"+(n+1))){
                 swapAll("image"+n, "image"+(n+1));
                 count += 1;
                 panelDraw(mainJFrame, panel);
@@ -120,13 +120,13 @@ public class fnlSandbox{
     } );
     
     
-    buttonPanel.add(b1);
-    buttonPanel.add(b2);
-    buttonPanel.add(b3);
+    buttonPanel.add(redButton);
+    buttonPanel.add(greenButton);
+    buttonPanel.add(blueButton);
     mainJFrame.add(buttonPanel, BorderLayout.EAST);
     
     for(int j = 0; j < 16; j++){
-      panel.add(memo.get("image"+j));
+      panel.add(memoButtons.get("image"+j));
     }
     
     int redVal = 0;
@@ -150,7 +150,7 @@ public class fnlSandbox{
       
       for(int k = 1; k < 200; k = k+(int)(10*Math.random())){
         for(int l = 1; l < 200; l = l+(int)(10*Math.random())){
-          int clr =  memo1.get("image"+m).getRGB(l,k);
+          int clr =  memoBufferedImages.get("image"+m).getRGB(l,k);
           redTotal += (clr & 0x00f00000) >> 20;
           greenTotal += (clr & 0x0000f000) >> 12;
           blueTotal += (clr & 0x000000f0) >> 4;
@@ -168,9 +168,9 @@ public class fnlSandbox{
       String blueKey = "blue"+m;
       String greenKey = "green"+m;
       
-      memo2.put(redKey, redVal);
-      memo2.put(blueKey, blueVal);
-      memo2.put(greenKey, greenVal);
+      memoColorValues.put(redKey, redVal);
+      memoColorValues.put(blueKey, blueVal);
+      memoColorValues.put(greenKey, greenVal);
       
       
       
@@ -187,34 +187,34 @@ public class fnlSandbox{
     
     
 //        for(int o = 0; o < 16; o++)
-//          panel.add(memo.get("image"+o));
+//          panel.add(memoButtons.get("image"+o));
 //        
 //        mainJFrameadd(panel, BorderLayout.CENTER);
 //        
 //        panel.updateUI();
     
     
-    System.out.println(memo2.get("red0")+", "+memo2.get("red1")+ "," + memo2.get("red15"));
+    System.out.println(memoColorValues.get("red0")+", "+memoColorValues.get("red1")+ "," + memoColorValues.get("red15"));
     
     
     }
   
   public static void swapHash(String key1, String key2){
-    JButton tempKey = memo.get(key1);
-    memo.put(key1, memo.get(key2));
-    memo.put(key2, tempKey);
+    JButton tempKey = memoButtons.get(key1);
+    memoButtons.put(key1, memoButtons.get(key2));
+    memoButtons.put(key2, tempKey);
   }
   
   public static void swapHash1(String key1, String key2){
-    BufferedImage tempKey = memo1.get(key1);
-    memo1.put(key1, memo1.get(key2));
-    memo1.put(key2, tempKey);
+    BufferedImage tempKey = memoBufferedImages.get(key1);
+    memoBufferedImages.put(key1, memoBufferedImages.get(key2));
+    memoBufferedImages.put(key2, tempKey);
   }
   
   public static void swapHash2(String key1, String key2){
-    Integer tempKey = memo2.get(key1);
-    memo2.put(key1, memo2.get(key2));
-    memo2.put(key2, tempKey);
+    Integer tempKey = memoColorValues.get(key1);
+    memoColorValues.put(key1, memoColorValues.get(key2));
+    memoColorValues.put(key2, tempKey);
   }
   
   public static void swapAll(String key, String key1){
@@ -232,7 +232,7 @@ public class fnlSandbox{
 //      do{
 //        count = 0;
 //        for(int n = 0; n < 15; n++)
-//          if(memo2.get("red"+n) < memo2.get("red"+(n+1))){
+//          if(memoColorValues.get("red"+n) < memoColorValues.get("red"+(n+1))){
 //            swapAll("image"+n, "image"+(n+1));
 //            count += 1; 
 //          
@@ -245,7 +245,7 @@ public class fnlSandbox{
 //      do{
 //        count = 0;
 //        for(int n = 0; n < 15; n++)
-//          if(memo2.get("green"+n) < memo2.get("green"+(n+1))){
+//          if(memoColorValues.get("green"+n) < memoColorValues.get("green"+(n+1))){
 //            swapAll("image"+n, "image"+(n+1));
 //            count += 1; 
 //        
@@ -258,7 +258,7 @@ public class fnlSandbox{
 //      do{
 //        count = 0;
 //        for(int n = 0; n < 15; n++)
-//          if(memo2.get("blue"+n) < memo2.get("blue"+(n+1))){
+//          if(memoColorValues.get("blue"+n) < memoColorValues.get("blue"+(n+1))){
 //            swapAll("image"+n, "image"+(n+1));
 //            count += 1;
 //          
@@ -269,7 +269,7 @@ public class fnlSandbox{
   
   
   
-  public static void panelDraw(JFrame f, JPanel panel){
+  public static void panelDraw(JFrame frame, JPanel panel){
     
 //        JPanel panel = new JPanel(new GridLayout(4, 4, 3, 3));
 //        mainJFramesetLayout(new BorderLayout());
@@ -278,19 +278,19 @@ public class fnlSandbox{
 //        
 //        JPanel buttonPanel = new JPanel();
 //       buttonPanel.setLayout(new GridLayout(3, 2));
-//        JButton b1 = new JButton("Red Sort");
-//        JButton b2 = new JButton("Blue Sort");
-//        JButton b3 = new JButton("Green Sort");
-//         buttonPanel.add(b1);
-//         buttonPanel.add(b2);
-//         buttonPanel.add(b3);
+//        JButton redButton = new JButton("Red Sort");
+//        JButton greenButton = new JButton("Blue Sort");
+//        JButton blueButton = new JButton("Green Sort");
+//         buttonPanel.add(redButton);
+//         buttonPanel.add(greenButton);
+//         buttonPanel.add(blueButton);
 //         mainJFrameadd(buttonPanel, BorderLayout.EAST);
     
     for(int j = 0; j < 16; j++){
-      //panel.add(memo.get("image"+j));
+      //panel.add(memoButtons.get("image"+j));
       String key = "image" + j;
-      JButton theButton = memo.get(key);
-      BufferedImage theImage = memo1.get(key);
+      JButton theButton = memoButtons.get(key);
+      BufferedImage theImage = memoBufferedImages.get(key);
       theButton.setIcon(new ImageIcon(theImage));
     }
     
